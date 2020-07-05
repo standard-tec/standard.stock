@@ -9,7 +9,7 @@ namespace Standard.Stock.Domain.Aggregates.TransactionAggregate
     public class Transaction : Entity, IAggregateRoot
     {
         public Guid TransactionId { get; private set; }
-        public Guid? MainTransaction { get; private set; }
+        public Guid? MainTransactionId { get; private set; }
         public string Initials { get; private set; }
         public TransactionType Type { get; private set; }
         public double Price { get; private set; }
@@ -18,15 +18,16 @@ namespace Standard.Stock.Domain.Aggregates.TransactionAggregate
         public DateTime Create { get; private set; }
 
         public List<Transaction> Deals { get; private set; } = new List<Transaction>();
+        public Transaction MainTransaction { get; private set; }
 
-        public Transaction(Guid mainTransaction,
+        public Transaction(Guid mainTransactionId,
                            string initials,
                            TransactionType type,
                            double price,
                            int quantity)
         {
             TransactionId = Guid.NewGuid();
-            MainTransaction = mainTransaction;
+            MainTransactionId = mainTransactionId;
             Initials = initials;
             Type = type;
             Price = price;
@@ -56,7 +57,7 @@ namespace Standard.Stock.Domain.Aggregates.TransactionAggregate
 
             if (left >= required)
             {
-                deal.MainTransaction = TransactionId;
+                deal.MainTransactionId = TransactionId;
                 Deals.Add(deal);
             }
             else
