@@ -1,6 +1,0 @@
-C:\projects\Standard.Stock\Standard.Stock.Infrastructure\bin\Debug\netstandard2.0\Standard.Stock.Infrastructure.deps.json
-C:\projects\Standard.Stock\Standard.Stock.Infrastructure\bin\Debug\netstandard2.0\Standard.Stock.Infrastructure.dll
-C:\projects\Standard.Stock\Standard.Stock.Infrastructure\obj\Debug\netstandard2.0\Standard.Stock.Infrastructure.csprojAssemblyReference.cache
-C:\projects\Standard.Stock\Standard.Stock.Infrastructure\obj\Debug\netstandard2.0\Standard.Stock.Infrastructure.AssemblyInfoInputs.cache
-C:\projects\Standard.Stock\Standard.Stock.Infrastructure\obj\Debug\netstandard2.0\Standard.Stock.Infrastructure.AssemblyInfo.cs
-C:\projects\Standard.Stock\Standard.Stock.Infrastructure\bin\Debug\netstandard2.0\Standard.Stock.Domain.dll

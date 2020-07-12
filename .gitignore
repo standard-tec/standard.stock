@@ -20,3 +20,8 @@ Standard.Stock.WebApi/obj/Debug/netcoreapp3.1/Standard.Stock.WebApi.AssemblyInfo
 /Standard.Stock.Application/bin/Debug/netstandard2.0
 /Standard.Stock.Event/bin/Debug/netstandard2.0
 /Standard.Stock.Event/obj
+/Standard.Stock.Domain/bin/Debug/netstandard2.0
+/Standard.Stock.Domain/obj/Debug/netstandard2.0
+/Standard.Stock.Domain/obj
+/Standard.Stock.WebApi/bin/Debug/netcoreapp3.1
+/Standard.Stock.WebApi/obj
