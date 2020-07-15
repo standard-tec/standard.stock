@@ -26,7 +26,6 @@ namespace Standard.Stock.Domain.Aggregates.TransactionAggregate
                            double price,
                            int quantity)
         {
-            TransactionId = Guid.NewGuid();
             MainTransactionId = mainTransactionId;
             Initials = initials;
             Type = type;
@@ -39,7 +38,6 @@ namespace Standard.Stock.Domain.Aggregates.TransactionAggregate
                            double price,
                            int quantity)
         {
-            TransactionId = Guid.NewGuid();
             Initials = initials;
             Type = type;
             Price = price;

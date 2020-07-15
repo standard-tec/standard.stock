@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.5" />
     <PackageReference Include="Standand.Framework.MessageBroker" Version="1.0.0" />
     <PackageReference Include="Standard.Framework.Result" Version="1.0.0" />
     <PackageReference Include="Standard.Framework.Seedworks" Version="1.1.0" />
@@ -21,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Standard.Stock.Domain\Standard.Stock.Domain.csproj" />
     <ProjectReference Include="..\Standard.Stock.Event\Standard.Stock.Event.csproj" />
+    <ProjectReference Include="..\Standard.Stock.Infrastructure\Standard.Stock.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
