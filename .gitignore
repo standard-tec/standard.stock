@@ -26,3 +26,4 @@ Standard.Stock.WebApi/obj/Debug/netcoreapp3.1/Standard.Stock.WebApi.AssemblyInfo
 /Standard.Stock.WebApi/bin/Debug/netcoreapp3.1
 /Standard.Stock.WebApi/obj
 /Standard.Stock.Infrastructure/obj
+/Standard.Stock.Infrastructure/bin/Debug/netstandard2.0

@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Data Source=DESKTOP-5MG615U\\SQLEXPRESS;Initial Catalog=Stock;User ID=usrStock;Password=usrStock"
+  }
+}
