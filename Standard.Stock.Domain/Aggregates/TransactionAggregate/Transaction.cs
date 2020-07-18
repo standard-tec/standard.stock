@@ -20,6 +20,8 @@ namespace Standard.Stock.Domain.Aggregates.TransactionAggregate
         public List<Transaction> Deals { get; private set; } = new List<Transaction>();
         public Transaction MainTransaction { get; private set; }
 
+        public Transaction() { }
+
         public Transaction(Guid mainTransactionId,
                            string initials,
                            TransactionType type,

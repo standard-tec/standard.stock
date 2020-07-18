@@ -32,6 +32,7 @@ namespace Standard.Stock
             services.AddControllers();
             services.AddAutofac();
             services.AddMemoryCache();
+            services.ConfigureOptions(Configuration);
 
             ContainerBuilder container = new ContainerBuilder();
 
@@ -50,7 +51,7 @@ namespace Standard.Stock
             }
 
             app.UseRouting();
-            app.ConfigureEventBus();
+            //app.ConfigureEventBus();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }

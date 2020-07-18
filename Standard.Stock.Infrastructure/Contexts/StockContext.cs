@@ -6,6 +6,9 @@ namespace Standard.Stock.Infrastructure.Contexts
 {
     public class StockContext : DbContext
     {
+
+        public StockContext(DbContextOptions options) : base(options) { }
+
         public DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBbuilder) 

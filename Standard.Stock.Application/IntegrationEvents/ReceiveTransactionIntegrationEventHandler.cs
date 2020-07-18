@@ -22,7 +22,7 @@ namespace Standard.Stock.Application.IntegrationEvents
                 Initials = @event.Initials,
                 Price = @event.Price,
                 Quantity = @event.Quantity,
-                Type = @event.Type
+                //Type = ()@event.Type
             };
 
             await Mediator.Send(command);

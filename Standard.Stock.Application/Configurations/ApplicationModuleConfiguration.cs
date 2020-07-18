@@ -1,7 +1,13 @@
 ﻿using Autofac;
-using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.Reflection;
+using Microsoft.Extensions.Options;
+using Standand.Framework.MessageBroker.Abstraction;
+using Standand.Framework.MessageBroker.Concrete;
+using Standand.Framework.MessageBroker.Concrete.Options;
+using Standard.Stock.Domain.Aggregates.TransactionAggregate;
+using Standard.Stock.Infrastructure.Contexts;
+using Standard.Stock.Infrastructure.Repositories;
 
 namespace Standard.Stock.Application.Configurations
 {
@@ -18,11 +24,41 @@ namespace Standard.Stock.Application.Configurations
         {
             base.Load(builder);
             ConfigureInstancePerLifetimeScope(builder, Configuration);
+
+            builder.Register(ctx =>
+            {
+                return Configuration;
+            })
+            .As<IConfiguration>()
+            .SingleInstance();
+
+            builder.Register(ctx =>
+            {
+                IOptions<BrokerOptions> broker = ctx.Resolve<IOptions<BrokerOptions>>();
+                IComponentContext context = ctx.Resolve<IComponentContext>();
+
+                return new EventBus(context, broker, ConfigureInstancePerLifetimeScope);
+            })
+            .As<IEventBus>()
+            .SingleInstance();
+
         }
 
         public void ConfigureInstancePerLifetimeScope(ContainerBuilder builder, IConfiguration configuration) 
         {
-        
+            builder.RegisterType<TransactionRepository>()
+                   .As<ITransactionRepository>()
+                   .InstancePerLifetimeScope();
+
+            builder.Register(ctx =>
+            {
+                DbContextOptionsBuilder<StockContext> options = new DbContextOptionsBuilder<StockContext>();
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+
+                return new StockContext(options.Options);
+            })
+            .As<StockContext>()
+            .InstancePerLifetimeScope();
         }
     }
 }
