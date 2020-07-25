@@ -10,16 +10,36 @@ namespace Standard.Stock.Infrastructure.EntityTypeConfigurations
         {
             builder.ToTable("Transaction");
 
-            builder.Property(p => p.TransactionId).HasColumnName("TransactionId");
-            builder.Property(p => p.MainTransaction).HasColumnName("MainTransaction");
-            builder.Property(p => p.Initials).HasColumnName("Initials");
-            builder.Property(p => p.Type).HasColumnName("Type");
-            builder.Property(p => p.Price).HasColumnName("Price");
-            builder.Property(p => p.Quantity).HasColumnName("Quantity");
-            builder.Property(p => p.IsComplete).HasColumnName("IsComplete");
-            builder.Property(p => p.Create).HasColumnName("Create");
+            builder.Property(p => p.TransactionId)
+                   .HasColumnName("TransactionId");
 
-            builder.HasMany(p => p.Deals).WithOne(p => p.MainTransaction);
+            builder.Property(p => p.MainTransactionId)
+                   .HasColumnName("MainTransactionId");
+
+            builder.Property(p => p.Initials)
+                   .HasColumnName("Initials");
+
+            builder.Property(p => p.Type)
+                   .HasColumnName("Type");
+
+            builder.Property(p => p.Price)
+                   .HasColumnName("Price");
+
+            builder.Property(p => p.Quantity)
+                   .HasColumnName("Quantity");
+
+            builder.Property(p => p.IsComplete)
+                   .HasColumnName("IsComplete"); 
+
+            builder.Property(p => p.Create)
+                   .HasColumnName("Create");
+
+            builder.Ignore(it => it.Id);
+            builder.Ignore(it => it.RequestedHashCode);
+
+            builder.HasMany(p => p.Deals)
+                   .WithOne(p => p.MainTransaction)
+                   .HasForeignKey(it => it.MainTransactionId);
         }
     }
 }

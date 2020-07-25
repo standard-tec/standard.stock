@@ -1,4 +1,5 @@
-﻿using Standard.Stock.Domain.Aggregates.TransactionAggregate;
+﻿using Microsoft.EntityFrameworkCore;
+using Standard.Stock.Domain.Aggregates.TransactionAggregate;
 using Standard.Stock.Infrastructure.Contexts;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Standard.Stock.Infrastructure.Repositories
         public List<Transaction> Get(DateTime? create, bool? isIncomplete)
         {
             return Context.Transactions
+                          .Include(it => it.Deals)
                           .Where(it => it.Create == create || it.IsComplete == isIncomplete)
                           .ToList();
         }

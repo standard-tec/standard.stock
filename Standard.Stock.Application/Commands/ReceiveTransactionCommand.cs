@@ -14,7 +14,7 @@ namespace Standard.Stock.Application.Commands
         public TransactionType Type { get; set; }
 
         [DataMember(Name = "price")]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         [DataMember(Name = "quantity")]
 
