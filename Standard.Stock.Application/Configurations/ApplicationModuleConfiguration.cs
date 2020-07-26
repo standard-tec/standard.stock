@@ -5,6 +5,8 @@ using Microsoft.Extensions.Options;
 using Standand.Framework.MessageBroker.Abstraction;
 using Standand.Framework.MessageBroker.Concrete;
 using Standand.Framework.MessageBroker.Concrete.Options;
+using Standard.Stock.Application.Queries.Abstraction;
+using Standard.Stock.Application.Queries.Concrete;
 using Standard.Stock.Domain.Aggregates.TransactionAggregate;
 using Standard.Stock.Infrastructure.Contexts;
 using Standard.Stock.Infrastructure.Repositories;
@@ -48,6 +50,10 @@ namespace Standard.Stock.Application.Configurations
         {
             builder.RegisterType<TransactionRepository>()
                    .As<ITransactionRepository>()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<TrandingQuery>()
+                   .As<ITrandingQuery>()
                    .InstancePerLifetimeScope();
 
             builder.Register(ctx =>
