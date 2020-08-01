@@ -1,42 +1,22 @@
 {
   "brokerOptions": {
-    "HostName": "d-cdweb01",
-    "UserName": "user.covid19",
-    "Password": "user.covid19",
+    "HostName": "127.0.0.1",
+    "UserName": "transaction",
+    "Passoword": null,
     "VirtualHost": "/",
     "MaxDegreeOfParallelism": "1",
-    "ConnectionName": "covid19"
+    "ConnectionName": "stock"
   },
   "channels": {
-    "gestao-arquivos": {
-      "get": {
-        "queue": "service.gestao-arquivo.get",
+    "transaction": {
+      "send": {
+        "queue": "miocrosservice.stock.transaction.send",
         "durable": false,
         "autoDelete": true,
         "exclusive": false
+
       }
-    },
-    "covid19": {
-      "json-schema": {
-        "queue": "microsservico.covid19.schema@v1",
-        "durable": false,
-        "autoDelete": true,
-        "exclusive": false
-      },
-      "envio": {
-        "queue": "microsservico.covid19.envio@v1",
-        "durable": false,
-        "autoDelete": true,
-        "exclusive": false
-      }
-    },
-    "srd": {
-      "envio-resultado": {
-        "queue": "servico.srd.envio-resultado",
-        "durable": false,
-        "autoDelete": true,
-        "exclusive": false
-      }
+      
     }
   }
 }

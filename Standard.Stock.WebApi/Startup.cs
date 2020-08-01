@@ -51,7 +51,7 @@ namespace Standard.Stock
             }
 
             app.UseRouting();
-            //app.ConfigureEventBus();
+            app.ConfigureEventBus();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }

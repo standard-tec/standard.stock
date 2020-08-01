@@ -26,7 +26,7 @@ namespace Standard.Stock.Application.Queries.Concrete
             IDictionary<string, object> paramters = new Dictionary<string, object>() 
             {
                 { "@Initials", request.Initials },
-                { "@Date", request.Create ?? DateTime.Now }
+                { "@Create", request.Create ?? DateTime.Now }
             };
 
             using (SqlConnection connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"))) 

@@ -43,7 +43,6 @@ namespace Standard.Stock.Application.Configurations
             })
             .As<IEventBus>()
             .SingleInstance();
-
         }
 
         public void ConfigureInstancePerLifetimeScope(ContainerBuilder builder, IConfiguration configuration) 

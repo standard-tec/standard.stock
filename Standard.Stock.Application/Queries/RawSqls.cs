@@ -11,7 +11,7 @@
 										,A.Initials
 					FROM				[dbo].[Transaction] A
 					WHERE				A.Type = 1
-					AND					CONVERT(DATE, A.[Create]) = CONVERT(DATE, @Date)
+					AND					CONVERT(DATE, A.[Create]) = CONVERT(DATE, @Create)
 					GROUP BY			A.Initials
 				),
 				SELLS AS
@@ -20,7 +20,7 @@
 										,A.Initials
 					FROM				[dbo].[Transaction] A
 					WHERE				A.Type = 2
-					AND					CONVERT(DATE, A.[Create]) = CONVERT(DATE, @Date)
+					AND					CONVERT(DATE, A.[Create]) = CONVERT(DATE, @Create)
 					GROUP BY			A.Initials
 				),
 				SUMMARY AS
@@ -38,7 +38,7 @@
 				LEFT JOIN			SELLS C
 				ON					A.Initials = C.Initials
 				WHERE				(A.Initials = @Initials OR @Initials IS NULL) 
-				AND					(CONVERT(DATE, A.[Create]) = CONVERT(DATE, @Date) OR @Date IS NULL)
+				AND					(CONVERT(DATE, A.[Create]) = CONVERT(DATE, @Create) OR @Create IS NULL)
 				GROUP BY			A.Initials, 
 									B.BUY,
 									C.SELL
