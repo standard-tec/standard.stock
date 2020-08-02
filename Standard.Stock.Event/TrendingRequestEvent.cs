@@ -3,7 +3,7 @@ using System;
 
 namespace Standard.Stock.Event
 {
-    public class TrandingRequestEvent : IntegrationEvent
+    public class TrendingRequestEvent : IntegrationEvent
     {
         public string Initials { get; set; }
         public DateTime? Create { get; set; }

@@ -1,8 +1,8 @@
 {
   "brokerOptions": {
-    "HostName": "127.0.0.1",
+    "HostName": "localhost",
     "UserName": "transaction",
-    "Passoword": null,
+    "Password": "transaction",
     "VirtualHost": "/",
     "MaxDegreeOfParallelism": "1",
     "ConnectionName": "stock"

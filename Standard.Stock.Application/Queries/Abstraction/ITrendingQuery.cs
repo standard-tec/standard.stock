@@ -3,8 +3,8 @@ using Standard.Stock.Application.ViewModels;
 
 namespace Standard.Stock.Application.Queries.Abstraction
 {
-    public interface ITrandingQuery
+    public interface ITrendingQuery
     {
-        IApplicationResult<TrandingResponseViewModel[]> Get(TrandingRequestViewModel request);
+        IApplicationResult<TrendingResponseViewModel[]> Get(TrendingRequestViewModel request);
     }
 }

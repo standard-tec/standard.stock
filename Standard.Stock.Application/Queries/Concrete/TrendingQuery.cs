@@ -11,18 +11,18 @@ using System.Linq;
 
 namespace Standard.Stock.Application.Queries.Concrete
 {
-    public class TrandingQuery : ITrandingQuery
+    public class TrendingQuery : ITrendingQuery
     {
         private IConfiguration Configuration { get; }
 
-        public TrandingQuery(IConfiguration configuration) 
+        public TrendingQuery(IConfiguration configuration) 
         {
             Configuration = configuration;
         }
 
-        public IApplicationResult<TrandingResponseViewModel[]> Get(TrandingRequestViewModel request)
+        public IApplicationResult<TrendingResponseViewModel[]> Get(TrendingRequestViewModel request)
         {
-            IApplicationResult<TrandingResponseViewModel[]> result = new ApplicationResult<TrandingResponseViewModel[]>();
+            IApplicationResult<TrendingResponseViewModel[]> result = new ApplicationResult<TrendingResponseViewModel[]>();
             IDictionary<string, object> paramters = new Dictionary<string, object>() 
             {
                 { "@Initials", request.Initials },
@@ -31,7 +31,7 @@ namespace Standard.Stock.Application.Queries.Concrete
 
             using (SqlConnection connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"))) 
             {
-                result.Result = connection.Query<TrandingResponseViewModel>(RawSqls.Tradings(), paramters).ToArray();
+                result.Result = connection.Query<TrendingResponseViewModel>(RawSqls.Tradings(), paramters).ToArray();
             }
 
             return result;

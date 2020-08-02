@@ -13,9 +13,9 @@ namespace Standard.Stock.WebApi.Controllers
     public class TransactionController : Controller
     {
         private IMediator Mediator { get; }
-        private ITrandingQuery TrandingQuery { get; }
+        private ITrendingQuery TrandingQuery { get; }
 
-        public TransactionController(IMediator mediator, ITrandingQuery trandingQuery) 
+        public TransactionController(IMediator mediator, ITrendingQuery trandingQuery) 
         {
             Mediator = mediator;
             TrandingQuery = trandingQuery;
@@ -24,7 +24,7 @@ namespace Standard.Stock.WebApi.Controllers
         [HttpPost, Produces("application/json", Type = typeof(IApplicationResult<string>))]
         public async Task<IActionResult> Post([FromBody]ReceiveTransactionCommand command) => await Mediator.Send(command);
 
-        [HttpGet("trandings"), Produces("application/json", Type = typeof(IApplicationResult<TrandingResponseViewModel[]>))]
-        public async Task<IActionResult> Get([FromQuery]TrandingRequestViewModel request) => TrandingQuery.Get(request);
+        [HttpGet("trandings"), Produces("application/json", Type = typeof(IApplicationResult<TrendingResponseViewModel[]>))]
+        public async Task<IActionResult> Get([FromQuery]TrendingRequestViewModel request) => TrandingQuery.Get(request);
     }
 }

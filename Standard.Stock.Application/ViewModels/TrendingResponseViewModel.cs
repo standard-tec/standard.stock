@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Standard.Stock.Application.ViewModels
 {
     [DataContract(Name = "tranding")]
-    public class TrandingResponseViewModel
+    public class TrendingResponseViewModel
     {
         [DataMember(Name = "initials")]
         public string Initials { get; set; }
@@ -21,10 +21,10 @@ namespace Standard.Stock.Application.ViewModels
         [DataMember(Name = "average")]
         public decimal Average { get; set; }
 
-        [DataMember(Name = "tranding")]
-        public decimal Tranding { get { return CalculateTrande(); } }
+        [DataMember(Name = "trending")]
+        public decimal Trending { get { return CalculateTrend(); } }
 
-        private decimal CalculateTrande() 
+        private decimal CalculateTrend() 
         {
             decimal buy = (decimal) TotalOfBuys / TotalOfTransactions;
             decimal sell = (decimal) TotalOfSells / TotalOfTransactions;

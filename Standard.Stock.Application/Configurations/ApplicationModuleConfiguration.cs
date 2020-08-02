@@ -51,8 +51,8 @@ namespace Standard.Stock.Application.Configurations
                    .As<ITransactionRepository>()
                    .InstancePerLifetimeScope();
 
-            builder.RegisterType<TrandingQuery>()
-                   .As<ITrandingQuery>()
+            builder.RegisterType<TrendingQuery>()
+                   .As<ITrendingQuery>()
                    .InstancePerLifetimeScope();
 
             builder.Register(ctx =>
