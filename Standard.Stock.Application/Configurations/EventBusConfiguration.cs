@@ -14,8 +14,11 @@ namespace Standard.Stock.Application.Configurations
         {
             IEventBus eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
 
-            IOptions<TransactionOptions> options = app.ApplicationServices.GetRequiredService<IOptions<TransactionOptions>>();
-            eventBus.SubscribeAsync<ReceiveTransactionEvent, IIntegrationEventHandler<ReceiveTransactionEvent>>(options.Value);
+            IOptions<TransactionOptions> transactionOptions = app.ApplicationServices.GetRequiredService<IOptions<TransactionOptions>>();
+            eventBus.SubscribeAsync<ReceiveTransactionEvent, IIntegrationEventHandler<ReceiveTransactionEvent>>(transactionOptions.Value);
+
+            IOptions<TrendingOptions> trendingOptions = app.ApplicationServices.GetRequiredService<IOptions<TrendingOptions>>();
+            eventBus.SubscribeAsync<TrendingRequestEvent, TrendingResponseEvent, IIntegrationEventHandler<TrendingRequestEvent, TrendingResponseEvent>>(trendingOptions.Value);
         }
     }
 }

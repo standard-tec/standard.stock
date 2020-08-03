@@ -17,7 +17,7 @@ namespace Standard.Stock.Application.Mappers
 
         public static TrendingResponseEvent MapTo(this TrendingResponseViewModel[] viewModels) 
         {
-            return new TrendingResponseEvent() { Trandings = viewModels.Select(MapTo).ToArray() };
+            return new TrendingResponseEvent() { Trendings = viewModels.Select(MapTo).ToArray() };
         }
 
         private static TrendingItemEvent MapTo(this TrendingResponseViewModel viewModel) 

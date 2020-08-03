@@ -6,6 +6,8 @@ namespace Standard.Stock.Event
     [DataContract(Name = "tranding-item")]
     public class TrendingItemEvent : IntegrationEvent
     {
+        public TrendingItemEvent() { }
+
         [DataMember(Name = "initials")]
         public string Initials { get; set; }
 

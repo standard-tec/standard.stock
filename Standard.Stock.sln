@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Standard.Stock.Domain", "St
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Standard.Stock.Infrastructure", "Standard.Stock.Infrastructure\Standard.Stock.Infrastructure.csproj", "{93DCE2E8-D4FD-4E06-B498-F716E97218BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Standard.Stock.Event", "Standard.Stock.Event\Standard.Stock.Event.csproj", "{09BEB3D1-CFC7-44C6-9336-B8B6332C93C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Standard.Stock.Event", "Standard.Stock.Event\Standard.Stock.Event.csproj", "{09BEB3D1-CFC7-44C6-9336-B8B6332C93C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

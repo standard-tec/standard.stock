@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Standand.Framework.MessageBroker.Abstraction;
 using Standand.Framework.MessageBroker.Concrete;
 using Standand.Framework.MessageBroker.Concrete.Options;
+using Standard.Framework.Seedworks.Abstraction.Events;
 using Standard.Stock.Application.Queries.Abstraction;
 using Standard.Stock.Application.Queries.Concrete;
 using Standard.Stock.Domain.Aggregates.TransactionAggregate;
