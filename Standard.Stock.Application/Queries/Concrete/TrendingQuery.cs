@@ -26,12 +26,24 @@ namespace Standard.Stock.Application.Queries.Concrete
             IDictionary<string, object> paramters = new Dictionary<string, object>() 
             {
                 { "@Initials", request.Initials },
-                { "@Create", request.Create ?? DateTime.Now }
+                { "@Create", request.Create ?? GetLastTrade() }
             };
 
             using (SqlConnection connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"))) 
             {
-                result.Result = connection.Query<TrendingResponseViewModel>(RawSqls.Tradings(), paramters).ToArray();
+                result.Result = connection.Query<TrendingResponseViewModel>(RawSqls.Tradings, paramters).ToArray();
+            }
+
+            return result;
+        }
+
+        private DateTime? GetLastTrade() 
+        {
+            DateTime? result = DateTime.Now;
+
+            using (SqlConnection connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"))) 
+            {
+                result = connection.QueryFirstOrDefault<DateTime>(RawSqls.LastTrade);
             }
 
             return result;
