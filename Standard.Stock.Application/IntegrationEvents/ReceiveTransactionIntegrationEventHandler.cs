@@ -11,7 +11,7 @@ namespace Standard.Stock.Application.IntegrationEvents
     {
         private IMediator Mediator { get; }
 
-        public ReceiveTransactionIntegrationEventHandler(IMediator mediator) 
+        public ReceiveTransactionIntegrationEventHandler(IMediator mediator)
         {
             Mediator = mediator;
         }

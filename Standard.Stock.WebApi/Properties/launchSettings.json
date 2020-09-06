@@ -1,7 +1,7 @@
-﻿{
+{
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:50864",
       "sslPort": 0
@@ -17,6 +17,12 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/home"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/home",
+      "publishAllPorts": true
     }
   }
 }

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -6,11 +7,13 @@ using Standand.Framework.MessageBroker.Abstraction;
 using Standand.Framework.MessageBroker.Concrete;
 using Standand.Framework.MessageBroker.Concrete.Options;
 using Standard.Framework.Seedworks.Abstraction.Events;
+using Standard.Stock.Application.Commands;
 using Standard.Stock.Application.Queries.Abstraction;
 using Standard.Stock.Application.Queries.Concrete;
 using Standard.Stock.Domain.Aggregates.TransactionAggregate;
 using Standard.Stock.Infrastructure.Contexts;
 using Standard.Stock.Infrastructure.Repositories;
+using System.Reflection;
 
 namespace Standard.Stock.Application.Configurations
 {
@@ -48,6 +51,25 @@ namespace Standard.Stock.Application.Configurations
 
         public void ConfigureInstancePerLifetimeScope(ContainerBuilder builder, IConfiguration configuration) 
         {
+            Assembly assembly = typeof(ReceiveTransactionCommand).GetTypeInfo().Assembly;
+
+            builder.RegisterAssemblyTypes(assembly)
+                   .AsClosedTypesOf(typeof(IRequestHandler<>))
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(assembly)
+                   .AsClosedTypesOf(typeof(IRequestHandler<,>))
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(assembly)
+                   .AsClosedTypesOf(typeof(IIntegrationEventHandler<>))
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(assembly)
+                   .AsClosedTypesOf(typeof(IIntegrationEventHandler<,>))
+                   .InstancePerLifetimeScope();
+
+
             builder.RegisterType<TransactionRepository>()
                    .As<ITransactionRepository>()
                    .InstancePerLifetimeScope();
@@ -59,7 +81,8 @@ namespace Standard.Stock.Application.Configurations
             builder.Register(ctx =>
             {
                 DbContextOptionsBuilder<StockContext> options = new DbContextOptionsBuilder<StockContext>();
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), (provider) => provider.EnableRetryOnFailure());
+                options.EnableDetailedErrors(true);
 
                 return new StockContext(options.Options);
             })

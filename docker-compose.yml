@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  standard.stock.webapi:
+    image: ${DOCKER_REGISTRY-}standardstockwebapi
+    build:
+      context: .
+      dockerfile: Standard.Stock.WebApi/Dockerfile

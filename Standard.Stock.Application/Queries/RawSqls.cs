@@ -11,7 +11,7 @@
 					(
 						SELECT				 COUNT(A.TransactionId) AS BUY
 											,A.Initials
-						FROM				[dbo].[Transaction] A
+						FROM				[dbo].[Transaction] (NOLOCK) A
 						WHERE				A.Type = 1
 						AND					CONVERT(DATE, A.[Create]) = CONVERT(DATE, @Create)
 						GROUP BY			A.Initials
@@ -20,7 +20,7 @@
 					(
 						SELECT				 COUNT(A.TransactionId) AS SELL
 											,A.Initials
-						FROM				[dbo].[Transaction] A
+						FROM				[dbo].[Transaction] (NOLOCK) A
 						WHERE				A.Type = 2
 						AND					CONVERT(DATE, A.[Create]) = CONVERT(DATE, @Create)
 						GROUP BY			A.Initials
@@ -28,7 +28,7 @@
 					SUMMARY AS
 					(
 						SELECT DISTINCT		A.*
-						FROM				[dbo].[Transaction] A
+						FROM				[dbo].[Transaction] (NOLOCK) A
 					)
 					SELECT DISTINCT		 A.Initials
 										,CAST(ROUND(AVG(A.Price), 2) AS decimal(18,2)) AS Average

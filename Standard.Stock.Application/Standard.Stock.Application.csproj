@@ -11,9 +11,8 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.35" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Standand.Framework.MessageBroker" Version="1.1.13" />
+    <PackageReference Include="Standand.Framework.MessageBroker" Version="1.1.14" />
     <PackageReference Include="Standard.Framework.Result" Version="1.0.0" />
-    <PackageReference Include="Standard.Framework.Seedworks" Version="1.1.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 

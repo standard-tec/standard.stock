@@ -7,6 +7,7 @@ using Standard.Stock.Application.Queries.Abstraction;
 using Standard.Stock.Application.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Standard.Stock.Application.Queries.Concrete
@@ -29,7 +30,8 @@ namespace Standard.Stock.Application.Queries.Concrete
                 { "@Create", request.Create ?? GetLastTrade() }
             };
 
-            using (SqlConnection connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"))) 
+            using (SqlConnection connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection")))
+            //using (SqlTransaction transaction = connection.BeginTransaction(IsolationLevel.ReadUncommitted))
             {
                 result.Result = connection.Query<TrendingResponseViewModel>(RawSqls.Tradings, paramters).ToArray();
             }
