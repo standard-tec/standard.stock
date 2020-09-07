@@ -1,6 +1,6 @@
 {
   "brokerOptions": {
-    "HostName": "rabbitmq.default",
+    "HostName": "rabbitmq",
     "UserName": "transaction",
     "Password": "transaction",
     "VirtualHost": "/",
