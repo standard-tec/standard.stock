@@ -6,3 +6,5 @@ services:
     build:
       context: .
       dockerfile: Standard.Stock.WebApi/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
