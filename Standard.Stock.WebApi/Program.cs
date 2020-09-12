@@ -15,8 +15,11 @@ namespace Standard.Stock
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
+            string env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+  
             return WebHost.CreateDefaultBuilder(args)
                           .ConfigureAppConfiguration((context, builder) => { builder.AddEnvironmentVariables(); })
+                          .UseEnvironment(env)
                           .UseStartup<Startup>();
         }
     }

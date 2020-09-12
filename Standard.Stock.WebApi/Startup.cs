@@ -19,9 +19,9 @@ namespace Standard.Stock
         public Startup(IWebHostEnvironment env)
         {
             Builder = new ConfigurationBuilder().SetBasePath(Path.Combine(env.ContentRootPath, "Settings"))
-                                                .AddJsonFile($"connectionstrings{env.EnvironmentName}.json", true, true)
+                                                .AddJsonFile($"connectionstrings.{env.EnvironmentName}.json", true, true)
                                                 .AddJsonFile($"appsettings.json", true, true)
-                                                .AddJsonFile($"messagebroker{env.EnvironmentName}.json", true, true)
+                                                .AddJsonFile($"messagebroker.{env.EnvironmentName}.json", true, true)
                                                 .AddEnvironmentVariables();
 
             Configuration = Builder.Build();

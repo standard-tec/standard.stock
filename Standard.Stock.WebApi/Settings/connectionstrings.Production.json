@@ -1,5 +1,5 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Data Source=mssql-ingress.com,31159;Initial Catalog=Stock;User ID=usrStock;Password=usrStock;"
+    "DefaultConnection": "Data Source=sql-server;Initial Catalog=Stock;User ID=usrStock;Password=usrStock;"
   }
 }
