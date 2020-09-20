@@ -4,6 +4,7 @@ using Standard.Framework.Result.Concrete;
 using Standard.Stock.Domain.Aggregates.TransactionAggregate;
 using Standard.Stock.Domain.Enuns;
 using Standard.Stock.Infrastructure.Contexts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -11,8 +12,9 @@ using System.Threading.Tasks;
 
 namespace Standard.Stock.Application.Commands
 {
-    public class ReceiveTransactionCommandHandler : IRequestHandler<ReceiveTransactionCommand, IApplicationResult<string>>
+    public class ReceiveTransactionCommandHandler : IRequestHandler<ReceiveTransactionCommand, IApplicationResult<string>>, IDisposable
     {
+        private bool disposed = false;
         private ITransactionRepository TransactionRepository { get; }
         private StockContext Context { get; }
 
@@ -25,60 +27,72 @@ namespace Standard.Stock.Application.Commands
         public async Task<IApplicationResult<string>> Handle(ReceiveTransactionCommand request, CancellationToken cancellationToken)
         {
             IApplicationResult<string> result = new ApplicationResult<string>();
-            try
+            TransactionType type = request.Type == TransactionType.Buy ? TransactionType.Sell : TransactionType.Buy;
+
+            List<Transaction> transactions = await TransactionRepository.Get(it => it.Initials == request.Initials,
+                                                                             it => it.IsComplete == false,
+                                                                             it => it.Type == type);
+
+            if (transactions.Count == 0)
             {
-                List<Transaction> transactions = TransactionRepository.Get(null, false);
+                Transaction transaction = new Transaction(request.Initials,
+                                                          request.Type,
+                                                          request.Price,
+                                                          request.Quantity);
 
-                if (transactions.Count == 0)
+                transactions.Add(transaction);
+            }
+            else
+            {
+
+                Transaction transaction = transactions.First();
+
+                Transaction deal = new Transaction(request.Initials,
+                                                   request.Type,
+                                                   request.Price,
+                                                   request.Quantity);
+
+                if (transaction != null)
                 {
-                    Transaction transaction = new Transaction(request.Initials,
-                                                              request.Type,
-                                                              request.Price,
-                                                              request.Quantity);
+                    Transaction remaining = transaction.SetDeal(deal);
 
-                    transactions.Add(transaction);
+                    if (remaining != null)
+                        transactions.Add(remaining);
                 }
                 else
-                {
-                    TransactionType type = request.Type == TransactionType.Buy ? TransactionType.Sell : TransactionType.Buy;
-                    Transaction transaction = transactions.FirstOrDefault(it => it.Initials == request.Initials &&
-                                                                                it.Type == type &&
-                                                                                !it.IsComplete);
-
-                    Transaction deal = new Transaction(request.Initials,
-                                                       request.Type,
-                                                       request.Price,
-                                                       request.Quantity);
-
-                    if (transaction != null)
-                    {
-                        Transaction remaining = transaction.SetDeal(deal);
-
-                        if (remaining != null)
-                            transactions.Add(remaining);
-                    }
-                    else
-                        transactions.Add(deal);
-                }
-
-                transactions.ToList()
-                            .ForEach(it =>
-                            {
-                                if (it.TransactionId == default)
-                                    TransactionRepository.Insert(it);
-                                else
-                                    TransactionRepository.Update(it);
-                            });
-
-                await Context.SaveChangesAsync();
-                result.Result = "Transaction received";
+                    transactions.Add(deal);
             }
-            catch (System.Exception e)
-            {
-                throw;
-            }
+
+            transactions.ToList()
+                        .ForEach(it =>
+                        {
+                            if (it.TransactionId == default)
+                                TransactionRepository.Insert(it);
+                            else
+                                TransactionRepository.Update(it);
+                        });
+
+            await Context.SaveChangesAsync();
+            result.Result = "Transaction received";
 
             return result;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+                TransactionRepository.Dispose();
+
+            disposed = true;
+            GC.Collect();
         }
     }
 }
