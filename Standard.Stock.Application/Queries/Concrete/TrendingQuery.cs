@@ -31,7 +31,6 @@ namespace Standard.Stock.Application.Queries.Concrete
             };
 
             using (SqlConnection connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection")))
-            //using (SqlTransaction transaction = connection.BeginTransaction(IsolationLevel.ReadUncommitted))
             {
                 result.Result = connection.Query<TrendingResponseViewModel>(RawSqls.Tradings, paramters).ToArray();
             }

@@ -78,6 +78,10 @@ namespace Standard.Stock.Application.Configurations
                    .As<ITrendingQuery>()
                    .InstancePerLifetimeScope();
 
+            builder.RegisterType<TransactionQuery>()
+                   .As<ITransactionQuery>()
+                   .InstancePerLifetimeScope();
+
             builder.Register(ctx =>
             {
                 DbContextOptionsBuilder<StockContext> options = new DbContextOptionsBuilder<StockContext>();

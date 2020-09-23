@@ -55,5 +55,25 @@
 				return "SELECT CONVERT(DATE, MAX([Create])) FROM [dbo].[Transaction]";
 			}
 		}
+		public static string Transactions
+		{
+			get 
+			{
+				return @"
+					SELECT		 TOP (100)
+								 [TransactionId]
+								,[MainTransactionId]
+								,[Initials]
+								,[Type]
+								,[Price]
+								,[Quantity]
+								,[IsComplete]
+								,[Create]
+					FROM		[dbo].[Transaction]
+					ORDER BY	[Create] 
+					DESC
+				";
+			}
+		}
     }
 }
