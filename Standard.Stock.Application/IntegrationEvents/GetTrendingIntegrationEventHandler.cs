@@ -4,13 +4,14 @@ using Standard.Stock.Application.Mappers;
 using Standard.Stock.Application.Queries.Abstraction;
 using Standard.Stock.Application.ViewModels;
 using Standard.Stock.Event;
+using System;
 using System.Threading.Tasks;
 
 namespace Standard.Stock.Application.IntegrationEvents
 {
     public class GetTrendingIntegrationEventHandler : IIntegrationEventHandler<TrendingRequestEvent, TrendingResponseEvent>
     {
-        private ITrendingQuery TrandingQuery { get; }
+        private ITrendingQuery TrandingQuery { get; set; }
 
         public GetTrendingIntegrationEventHandler(ITrendingQuery trandingQuery) 
         {
@@ -23,6 +24,14 @@ namespace Standard.Stock.Application.IntegrationEvents
             IApplicationResult<TrendingResponseViewModel[]> result = TrandingQuery.Get(request);
 
             return result.Result.MapTo();
+        }
+
+        public void Dispose()
+        {
+            TrandingQuery = null;
+
+            GC.Collect();
+            GC.WaitForFullGCComplete();
         }
     }
 }

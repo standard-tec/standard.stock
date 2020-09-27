@@ -3,6 +3,7 @@ using Standard.Framework.Seedworks.Abstraction.Events;
 using Standard.Stock.Application.Commands;
 using Standard.Stock.Domain.Enuns;
 using Standard.Stock.Event;
+using System;
 using System.Threading.Tasks;
 
 namespace Standard.Stock.Application.IntegrationEvents
@@ -27,6 +28,12 @@ namespace Standard.Stock.Application.IntegrationEvents
             };
 
             await Mediator.Send(command);
+        }
+
+        public void Dispose()
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
     }
 }

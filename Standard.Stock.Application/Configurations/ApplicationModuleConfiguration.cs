@@ -29,7 +29,7 @@ namespace Standard.Stock.Application.Configurations
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
-            ConfigureInstancePerLifetimeScope(builder, Configuration);
+            Assembly assembly = typeof(ReceiveTransactionCommand).GetTypeInfo().Assembly;
 
             builder.Register(ctx =>
             {
@@ -41,17 +41,12 @@ namespace Standard.Stock.Application.Configurations
             builder.Register(ctx =>
             {
                 IOptions<BrokerOptions> broker = ctx.Resolve<IOptions<BrokerOptions>>();
-                IComponentContext context = ctx.Resolve<IComponentContext>();
-
-                return new EventBus(context, broker, ConfigureInstancePerLifetimeScope);
+                ILifetimeScope scope = ctx.Resolve<ILifetimeScope>();
+                
+                return new EventBus(scope, broker);
             })
             .As<IEventBus>()
             .SingleInstance();
-        }
-
-        public void ConfigureInstancePerLifetimeScope(ContainerBuilder builder, IConfiguration configuration) 
-        {
-            Assembly assembly = typeof(ReceiveTransactionCommand).GetTypeInfo().Assembly;
 
             builder.RegisterAssemblyTypes(assembly)
                    .AsClosedTypesOf(typeof(IRequestHandler<>))
@@ -68,7 +63,6 @@ namespace Standard.Stock.Application.Configurations
             builder.RegisterAssemblyTypes(assembly)
                    .AsClosedTypesOf(typeof(IIntegrationEventHandler<,>))
                    .InstancePerLifetimeScope();
-
 
             builder.RegisterType<TransactionRepository>()
                    .As<ITransactionRepository>()
