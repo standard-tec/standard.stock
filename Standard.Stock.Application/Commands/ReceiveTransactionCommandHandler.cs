@@ -29,9 +29,9 @@ namespace Standard.Stock.Application.Commands
             IApplicationResult<string> result = new ApplicationResult<string>();
             TransactionType type = request.Type == TransactionType.Buy ? TransactionType.Sell : TransactionType.Buy;
 
-            List<Transaction> transactions = await TransactionRepository.Get(it => it.Initials == request.Initials,
+            List<Transaction> transactions = new List<Transaction>(); /* await TransactionRepository.Get(it => it.Initials == request.Initials,
                                                                              it => it.IsComplete == false,
-                                                                             it => it.Type == type);
+                                                                             it => it.Type == type);*/
 
             if (transactions.Count == 0)
             {
