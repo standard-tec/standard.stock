@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Settings\connectionstrings.Development.json" />
+    <Content Remove="Settings\connectionstrings.Development.Production.json" />
+    <Content Remove="Settings\connectionstrings.json" />
     <Content Remove="Settings\connectionstrings.Production.json" />
+    <Content Remove="Settings\messagebroker.Development.json" />
+    <Content Remove="Settings\messagebroker.json" />
     <Content Remove="Settings\messagebroker.Production.json" />
   </ItemGroup>
 
@@ -20,12 +25,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Standard.Stock.Application\Standard.Stock.Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Settings\connectionstrings.Development.Production.json">
-      <DependentUpon>connectionstrings.Development.json</DependentUpon>
-    </Content>
   </ItemGroup>
 
 </Project>
