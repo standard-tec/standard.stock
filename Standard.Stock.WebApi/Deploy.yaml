@@ -32,12 +32,13 @@ spec:
     spec:
       containers:
       - name: stock
-        image: igortavares/standard.stock:${BUILD_ID}
+        image: ${REPOSITORY_TAG}
         ports:
         - containerPort: 80
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Production"
+        imagePullPolicy: Never
         resources: 
           requests:
             memory: 100Mi
