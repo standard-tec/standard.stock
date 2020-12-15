@@ -2,15 +2,15 @@
 pipeline {
     agent any
 
-    environment{
+    environment {
+        //ORGANIZATION_NAME = 'igortavares82'
+        //DOCKERHUB_USERNAME='igortavares'
         SERVICE_NAME = 'standard.stock'
-        ORGANIZATION_NAME = 'igortavares82'
-        DOCKERHUB_USERNAME='igortavares'
         REPOSIUTORY_TAG='${DOCKERHUB_USERNAME}/${ORGANIZATION_NAME}-${SERVICE_NAME}:${BUILD_ID}'
     }
 
     stages {
-        stage('Checkout'){
+        stage('Checkout') {
             steps{
                 cleanWs()
                 git credentialsId: 'GitHub', url: 'https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}.git'
@@ -43,7 +43,7 @@ pipeline {
 
         stage('Deploy to Cluster') {
             steps {
-                bat 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply'
+                bat 'envsubst < ${WORKSPACE}/Deploy.yaml | kubectl apply -f -'
             }
         }
     }
