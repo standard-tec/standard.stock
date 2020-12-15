@@ -37,13 +37,13 @@ pipeline {
 
         stage('Build and Push Image'){
             steps {
-                bat 'docker image build -t ${REPOSITORY_TAG} .'
+                sh 'docker image build -t ${REPOSITORY_TAG} .'
             }
         }
 
         stage('Deploy to Cluster') {
             steps {
-                bat 'envsubst < ${WORKSPACE}/Deploy.yaml | kubectl apply -f -'
+                sh 'envsubst < ${WORKSPACE}/Deploy.yaml | kubectl apply -f -'
             }
         }
     }
