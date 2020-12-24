@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/standard-tec/standard.stock.git'
+                sh 'dotnet --version'
             }
         }
 
