@@ -11,7 +11,9 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            git credentialsId: 'GitHub', url: 'https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}.git'
+            steps {
+                git credentialsId: 'GitHub', url: 'https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}.git'
+            }
         }
 
         
