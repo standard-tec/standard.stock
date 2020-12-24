@@ -1,0 +1,57 @@
+﻿ apiVersion: v1
+kind: Service
+metadata:
+  name: standard-stock
+  labels: 
+    app: stock
+spec:
+  selector:
+    app: stock
+  ports:
+    - port: 80
+      name: http      
+  type: LoadBalancer 
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: standard-stock
+  labels:
+    app: stock
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: stock
+  template:
+    metadata:
+      labels:
+        app: stock
+    spec:
+      containers:
+      - name: stock
+        image: ${REPOSITORY_TAG}
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        imagePullPolicy: Never
+        resources: 
+          requests:
+            memory: 100Mi
+            cpu: 0.2
+          limits:
+            memory: 200Mi
+            cpu: 0.5
+        volumeMounts:
+        - name: settings
+          mountPath: /app/Settings
+          readOnly: true
+      volumes:
+      - name: settings
+        secret:
+          secretName: appsettings-production-stock
+        
