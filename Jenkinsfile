@@ -1,9 +1,9 @@
 ﻿pipeline {
     agent any
     stages {
-        stage('text') {
+        stage('build') {
             steps {
-                echo 'teste'
+                git clone 'https://github.com/standard-tec/standard.stock.git'
             }
         }        
     }
