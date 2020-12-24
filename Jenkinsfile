@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: "https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}.git"
+                git url: 'https://github.com/standard-tec/standard.stock.git'
             }
         }
 
