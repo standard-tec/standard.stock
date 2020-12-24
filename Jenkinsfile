@@ -3,7 +3,7 @@
     stages {
         stage('build') {
             steps {
-                git clone 'https://github.com/standard-tec/standard.stock.git'
+                git credentialsId: 'GitHub', url: 'https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}.git'
             }
         }        
     }
