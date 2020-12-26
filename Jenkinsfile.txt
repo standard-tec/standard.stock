@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-				echo 'test'
+				echo 'test 123'
 			}
 		}			
     }
