@@ -21,6 +21,6 @@ namespace Standard.Stock
                           .ConfigureAppConfiguration((context, builder) => { builder.AddEnvironmentVariables(); })
                           .UseEnvironment(env)
                           .UseStartup<Startup>();
-        }
+        } 
     }
 }
