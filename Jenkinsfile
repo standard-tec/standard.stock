@@ -1,9 +1,9 @@
 ﻿pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage("Checkout") {
             steps {
-					git credentialsId: 'GitHub', url: 'https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}.git'
+					echo "test"
 			}
 		}			
     }
