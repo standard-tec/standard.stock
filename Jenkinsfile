@@ -13,6 +13,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
+				echo "${SERVICE_NAME}"
                 git credentialsId: 'GitHub', url: 'https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}.git'
 			}
 		}			
